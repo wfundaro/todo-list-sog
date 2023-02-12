@@ -1,0 +1,16 @@
+<svg width="1248px" height="940px" version="1.1" xmlns="http://www.w3.org/2000/svg"
+    xmlSpace="preserve"
+    style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(0.907899,0,0,0.852696,56.025,21.0644)">
+        <rect id="Plan-de-travail1" x="-61.708" y="-24.703"
+            width="1373.51" height="1101.77" style="fill:none;" />
+        <g id="Plan-de-travail11">
+            <g id="Jump-Left-Icon"
+                transform="matrix(56.8947,0,0,60.578,-35277.3,-191386)">
+                <path
+                    d="M631,3171L629,3171L629,3177L619,3168L629,3159L629,3165L631,3165C637.428,3165 642.69,3171.05 643,3177C640.069,3173.9 635.769,3171 631,3171Z"
+                    style="fill:white;" />
+            </g>
+        </g>
+    </g>
+</svg>

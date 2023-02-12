@@ -1,0 +1,87 @@
+.todo-card {
+  width: 90%;
+  height: 80px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  background-color: #3e4058;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  padding: 12px 24px;
+  gap: 32px;
+  color: white;
+}
+
+.title-card {
+  flex: 1;
+  justify-content: flex-start;
+  text-align: left;
+  cursor: pointer;
+}
+
+.btn {
+  width: 48px;
+  height: 48px;
+  border: none;
+  cursor: pointer;
+  border: 2px solid #f2f2f2;
+  background-color: #3e4058;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #5a5c7a;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-completed {
+  border-radius: 50%;
+}
+
+.btn-completed > img {
+  width: 32px;
+  height: 32px;
+  padding-top: 4px;
+}
+
+.btn-edit-delete-container {
+  display: flex;
+  gap: 16px;
+}
+
+.btn-edit,
+.btn-delete {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  padding-left: 12px;
+}
+
+.btn-edit {
+  background-color: #4b9ed1;
+}
+
+.btn-edit:hover {
+  background-color: #61aad7;
+}
+
+.btn-edit > img {
+  width: 64px;
+  height: 64px;
+  padding-top: 4px;
+}
+
+.btn-delete {
+  background-color: #d42222;
+}
+
+.btn-delete:hover {
+  background-color: #e24b4b;
+}
+
+.btn-delete > img {
+  width: 32px;
+  height: 32px;
+  padding: 4px 4px 0 0;
+}

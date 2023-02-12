@@ -1,0 +1,20 @@
+.circle-button {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 24px 0;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  z-index: 10;
+}
+
+.circle-button:hover {
+  transition: background-color 0.2s ease-in-out;
+}
+
+.circle-button > img {
+  width: 40px;
+  height: 40px;
+}
