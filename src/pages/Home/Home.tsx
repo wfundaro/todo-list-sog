@@ -5,7 +5,7 @@ import useHome from "./useHome";
 import "./Home.css";
 
 const Home = () => {
-  const { todos, completedTodoToggle } = useHome();
+  const { todos, completedTodoToggle, cardClick } = useHome();
 
   return (
     <div className="home-container">
@@ -21,6 +21,7 @@ const Home = () => {
               key={todo.id}
               todo={todo}
               completedEvent={completedTodoToggle}
+              cardClick={cardClick}
             />
           );
         })}

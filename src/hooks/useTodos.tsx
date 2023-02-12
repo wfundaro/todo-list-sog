@@ -16,6 +16,14 @@ const useTodos = () => {
     sortTodos([...otherTodos, todo]);
   };
 
+  const getById = async (id: number): Promise<TodoModel | undefined> => {
+    const todo = await todoService.findById(id);
+    if (todo) {
+      setTodos([todo as TodoModel]);
+    }
+    return todo as TodoModel;
+  };
+
   const sortTodos = (todosToSort: TodoModel[]) => {
     const sortTodoNotCompleted = todosToSort
       .filter((t) => t.completed === 0)
@@ -35,6 +43,7 @@ const useTodos = () => {
   return {
     todos,
     update,
+    getById,
   };
 };
 export default useTodos;

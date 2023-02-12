@@ -1,0 +1,31 @@
+.complete-display-todo-container {
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.top {
+    display: flex;
+    align-items: center;
+}
+
+.top>h2 {
+    flex: 1;
+    text-align: center;
+    transform: translateX(-32px);
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.complete-todo-card {
+    width: 90%;
+    border-radius: 10px;
+    background-color: #3e4058;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    padding: 12px 32px;
+    color: white;
+}
+
+.complete-description-card {
+    margin-top: 48px;
+}

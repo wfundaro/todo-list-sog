@@ -9,6 +9,10 @@ class TodoService {
   async update(todo: TodoModel) {
     return TodoStore.getInstance().update(todo);
   }
+
+  async findById(id: number) {
+    return TodoStore.getInstance().getById(id);
+  }
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
