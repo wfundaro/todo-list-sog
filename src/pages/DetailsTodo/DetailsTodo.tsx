@@ -3,7 +3,7 @@ import * as CircleButton from "../../components/CircleButton/CircleButton";
 
 import "./DetailsTodo.css";
 
-const CompleteDisplayTodo = () => {
+const DetailsTodo = () => {
   const { todo, backButtonClick } = useCompleteDisplayTodo();
   return (
     <div className="complete-display-todo-container">
@@ -19,4 +19,4 @@ const CompleteDisplayTodo = () => {
   );
 };
 
-export default CompleteDisplayTodo;
+export default DetailsTodo;

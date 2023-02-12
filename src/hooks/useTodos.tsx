@@ -42,6 +42,12 @@ const useTodos = () => {
     return newTodo as TodoModel;
   };
 
+  const deleteById = async (id: number): Promise<void> => {
+    await todoService.delete(id);
+    const otherTodos = todos.filter((todo) => todo.id !== id);
+    setTodos([...otherTodos]);
+  };
+
   useEffect(() => {
     init();
   }, []);
@@ -51,6 +57,7 @@ const useTodos = () => {
     update,
     getById,
     add,
+    deleteById,
   };
 };
 export default useTodos;

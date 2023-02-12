@@ -3,7 +3,7 @@ import useTodos from "../../hooks/useTodos";
 import { TodoModel } from "../../models/TodoModel";
 
 const useHome = () => {
-  const { todos, update } = useTodos();
+  const { todos, update, deleteById } = useTodos();
   const navigate = useNavigate();
 
   const completedTodoToggle = (todo: TodoModel) => {
@@ -20,11 +20,21 @@ const useHome = () => {
     navigate(`/todo/add`);
   };
 
+  const editTodo = (id: number) => {
+    navigate(`/todo/${id}/edit`);
+  };
+
+  const deleteTodo = (id: number) => {
+    deleteById(id);
+  };
+
   return {
     todos,
     completedTodoToggle,
     cardClick,
-    addButtonClick
+    addButtonClick,
+    editTodo,
+    deleteTodo,
   };
 };
 

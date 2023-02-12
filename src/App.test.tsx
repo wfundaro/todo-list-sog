@@ -34,5 +34,4 @@ describe("App Home", () => {
     const imgRepresentCompleted = await screen.findAllByAltText("check todo");
     expect(imgRepresentCompleted).toHaveLength(1);
   });
-
 });
