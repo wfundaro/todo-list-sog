@@ -5,7 +5,7 @@ import useHome from "./useHome";
 import "./Home.css";
 
 const Home = () => {
-  const { todos } = useHome();
+  const { todos, completedTodoToggle } = useHome();
 
   return (
     <div className="home-container">
@@ -16,7 +16,13 @@ const Home = () => {
 
       <div className="todo-list" data-testid="home-todo-list">
         {todos.map((todo) => {
-          return <TodoCard key={todo.id} todo={todo} />;
+          return (
+            <TodoCard
+              key={todo.id}
+              todo={todo}
+              completedEvent={completedTodoToggle}
+            />
+          );
         })}
       </div>
     </div>

@@ -3,11 +3,22 @@ import "./TodoCard.css";
 import checkIcon from "../../assets/checkmark_icon.svg";
 import editIcon from "../../assets/edit_icon.svg";
 import deleteIcon from "../../assets/delete_icon.svg";
+import { TodoModel } from "../../models/TodoModel";
 
-const TodoCard = ({ todo }: TodoCardProps) => {
+const TodoCard = ({ todo, completedEvent }: TodoCardProps) => {
+  const completeButtonClick = (todo: TodoModel) => {
+    if (completedEvent) {
+      completedEvent(todo);
+    }
+  };
+
   return (
     <div className="todo-card" data-testid="todo-card">
-      <button className="btn btn-completed" data-testid="btn-completed">
+      <button
+        className="btn btn-completed"
+        data-testid="btn-completed"
+        onClick={() => completeButtonClick(todo)}
+      >
         {todo.completed === 1 && <img src={checkIcon} alt="check todo" />}
       </button>
       <div className="title-card" title="Cliquez pour agrandir">

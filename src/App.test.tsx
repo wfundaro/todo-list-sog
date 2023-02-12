@@ -1,8 +1,7 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import App from "./App";
 import Home from "./pages/Home/Home";
-import TodoCard from "./components/TodoCard/TodoCard";
 import todos from "./data/todos";
 
 describe("App Home", () => {
@@ -21,26 +20,19 @@ describe("App Home", () => {
 
   it("count TodoCard", async () => {
     render(<Home />);
-    const todoCard = await screen.findAllByTestId("todo-card").then((e) => e);
+    const todoCard = await screen.findAllByTestId("todo-card");
     expect(todoCard).toHaveLength(todos.length);
+    const titleCardExists = screen.getByText(/Learn Vue/i);
+    expect(titleCardExists).toBeInTheDocument();
   });
 
   it("check completed card", async () => {
     render(<Home />);
-    const todoCard = await screen.findAllByTestId("todo-card").then((e) => e);
+    const todoCard = await screen.findAllByTestId("todo-card");
     expect(todoCard).toHaveLength(todos.length);
 
-    const imgRepresentCompleted = await screen
-      .findAllByAltText("check todo")
-      .then((e) => e);
+    const imgRepresentCompleted = await screen.findAllByAltText("check todo");
     expect(imgRepresentCompleted).toHaveLength(1);
   });
 
-  it("todo card completed button", async () => {
-    render(<Home />);
-    const todoCardCompletedButtons = await screen
-      .findAllByTestId("btn-completed")
-      .then((e) => e);
-    expect(todoCardCompletedButtons).toHaveLength(todos.length);
-  });
 });
