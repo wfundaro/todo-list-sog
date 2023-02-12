@@ -12,8 +12,8 @@ const useTodos = () => {
 
   const update = async (todo: TodoModel): Promise<void> => {
     await todoService.update(todo);
-    const otherTodos = todos.filter((t) => t.id !== todo.id);
-    sortTodos([...otherTodos, todo]);
+    const todos = await todoService.getTodos();
+    setTodos([...todos]);
   };
 
   const getById = async (id: number): Promise<TodoModel | undefined> => {
@@ -36,6 +36,12 @@ const useTodos = () => {
     setTodos([...sortTodoNotCompleted, ...sortTodoCompleted]);
   };
 
+  const add = async (todo: TodoModel): Promise<TodoModel | undefined> => {
+    const newTodo = await todoService.add(todo);
+    setTodos([...todos, newTodo as TodoModel]);
+    return newTodo as TodoModel;
+  };
+
   useEffect(() => {
     init();
   }, []);
@@ -44,6 +50,7 @@ const useTodos = () => {
     todos,
     update,
     getById,
+    add,
   };
 };
 export default useTodos;

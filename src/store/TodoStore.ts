@@ -15,29 +15,31 @@ export class TodoStore {
 
   fillTodos(todos: TodoModel[]) {
     TodoStore.getInstance().todos = todos;
-    this.sortTodos();
+    // this.sortTodos();
   }
 
   add(todo: TodoModel) {
     const newId =
       Math.max(...TodoStore.getInstance().todos.map((t) => t.id ?? 1)) + 1;
     const newTodo = { ...todo, id: newId };
-    TodoStore.getInstance().todos.push(newTodo);
-    this.sortTodos();
+    TodoStore.getInstance().todos.unshift(newTodo);
     return newTodo;
   }
 
   update(todo: TodoModel) {
     const instance = TodoStore.getInstance();
-    const index = instance.todos.findIndex((t) => t.id === todo.id);
-    instance.todos[index] = todo;
-    this.sortTodos();
+    const otherTodos = instance.todos.filter((t) => t.id !== todo.id);
+    todo.completed === 1 ? otherTodos.push(todo) : otherTodos.unshift(todo);
+    TodoStore.getInstance().fillTodos(otherTodos);
+    // const index = instance.todos.findIndex((t) => t.id === todo.id);
+    // instance.todos[index] = todo;
+    // this.sortTodos();
   }
 
   delete(id: number) {
     const instance = TodoStore.getInstance();
     instance.todos = instance.todos.filter((t) => t.id !== id);
-    this.sortTodos();
+    // this.sortTodos();
   }
 
   getAll() {

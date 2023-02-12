@@ -16,10 +16,15 @@ const useHome = () => {
     navigate(`/todo/${id}`);
   };
 
+  const addButtonClick = () => {
+    navigate(`/todo/add`);
+  };
+
   return {
     todos,
     completedTodoToggle,
-    cardClick
+    cardClick,
+    addButtonClick
   };
 };
 

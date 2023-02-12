@@ -13,6 +13,10 @@ class TodoService {
   async findById(id: number) {
     return TodoStore.getInstance().getById(id);
   }
+
+  async add(todo: TodoModel) {
+    return TodoStore.getInstance().add(todo);
+  }
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export

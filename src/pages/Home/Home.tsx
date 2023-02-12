@@ -5,12 +5,12 @@ import useHome from "./useHome";
 import "./Home.css";
 
 const Home = () => {
-  const { todos, completedTodoToggle, cardClick } = useHome();
+  const { todos, completedTodoToggle, cardClick, addButtonClick } = useHome();
 
   return (
     <div className="home-container">
       <div className="top">
-        <CircleButton.Add onClick={() => {}} />
+        <CircleButton.Add onClick={addButtonClick} />
         <h2>Liste de vos tâches</h2>
       </div>
 
