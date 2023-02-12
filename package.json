@@ -1,6 +1,7 @@
 {
   "name": "my-app",
   "version": "0.1.0",
+  "homepage": "https://wfundaro.github.io/todo-list-sog",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -22,6 +23,8 @@
     "start": "env-cmd -f src/.env.local react-scripts start",
     "prod": "env-cmd -f src/.env.server react-scripts start",
     "build": "env-cmd -f src/.env.local react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prettier": "prettier --write src/**/*.{js,jsx,ts,tsx,json,css,scss}"
@@ -43,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }
