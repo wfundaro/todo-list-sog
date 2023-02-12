@@ -3,4 +3,5 @@ export interface TodoModel {
   title: string;
   description?: string;
   completed: number;
+  updated_at?: Date;
 }

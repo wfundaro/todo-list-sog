@@ -7,13 +7,19 @@ const useTodos = () => {
 
   const init = async (): Promise<void> => {
     const todos = await todoService.getTodos();
-    setTodos([...todos]);
+    sortTodos(todos);
   };
 
   const update = async (todo: TodoModel): Promise<void> => {
-    await todoService.update(todo);
-    const todos = await todoService.getTodos();
-    setTodos([...todos]);
+    await todoService.update({ ...todo, updated_at: new Date() });
+    if (process.env.REACT_APP_STORE === "store") {
+      const todos = await todoService.getTodos();
+      sortTodos(todos);
+    } else {
+      const otherTodos = todos.filter((t) => t.id !== todo.id);
+      todo.completed === 1 ? otherTodos.push(todo) : otherTodos.unshift(todo);
+      setTodos([...otherTodos]);
+    }
   };
 
   const getById = async (id: number): Promise<TodoModel | undefined> => {
@@ -26,19 +32,34 @@ const useTodos = () => {
 
   const sortTodos = (todosToSort: TodoModel[]) => {
     const sortTodoNotCompleted = todosToSort
-      .filter((t) => t.completed === 0)
-      .sort((a, b) => (a.title < b.title ? -1 : 1));
+      .filter((t) => t.completed === 0 || !t.completed)
+      .sort((a, b) => {
+        const dateA = a.updated_at ? new Date(a.updated_at).getTime() : 0;
+        const dateB = b.updated_at ? new Date(b.updated_at).getTime() : 0;
+        if (dateA || dateB) {
+          return dateA < dateB ? 1 : -1;
+        }
+        return a.title < b.title ? -1 : 1;
+      });
 
     const sortTodoCompleted = todosToSort
-      .filter((t) => t.completed === 1)
-      .sort((a, b) => (a.title < b.title ? -1 : 1));
+      .filter((t) => t.completed === 1 || t.completed)
+      .sort((a, b) => {
+        const dateA = a.updated_at ? new Date(a.updated_at).getTime() : 0;
+        const dateB = b.updated_at ? new Date(b.updated_at).getTime() : 0;
+        if (dateA || dateB) {
+          return dateA > dateB ? 1 : -1;
+        }
+        return a.title < b.title ? -1 : 1;
+      });
 
     setTodos([...sortTodoNotCompleted, ...sortTodoCompleted]);
   };
 
   const add = async (todo: TodoModel): Promise<TodoModel | undefined> => {
-    const newTodo = await todoService.add(todo);
+    const newTodo = await todoService.add({ ...todo, updated_at: new Date() });
     setTodos([...todos, newTodo as TodoModel]);
+    console.log("newTodo", newTodo);
     return newTodo as TodoModel;
   };
 
@@ -50,6 +71,7 @@ const useTodos = () => {
 
   useEffect(() => {
     init();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {

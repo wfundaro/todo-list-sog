@@ -1,5 +1,4 @@
-import React from "react";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import App from "./App";
 import Home from "./pages/Home/Home";
 import todos from "./data/todos";

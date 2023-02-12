@@ -8,14 +8,16 @@ export class TodoStore {
   static getInstance() {
     if (!TodoStore.instance) {
       TodoStore.instance = new TodoStore();
-      TodoStore.instance.fillTodos(todos);
+      if (process.env.REACT_APP_STORE === "store") {
+        TodoStore.instance.fillTodos(todos);
+      }
     }
     return TodoStore.instance;
   }
 
   fillTodos(todos: TodoModel[]) {
     TodoStore.getInstance().todos = todos;
-    // this.sortTodos();
+    this.sortTodos();
   }
 
   add(todo: TodoModel) {
@@ -31,15 +33,11 @@ export class TodoStore {
     const otherTodos = instance.todos.filter((t) => t.id !== todo.id);
     todo.completed === 1 ? otherTodos.push(todo) : otherTodos.unshift(todo);
     TodoStore.getInstance().fillTodos(otherTodos);
-    // const index = instance.todos.findIndex((t) => t.id === todo.id);
-    // instance.todos[index] = todo;
-    // this.sortTodos();
   }
 
   delete(id: number) {
     const instance = TodoStore.getInstance();
     instance.todos = instance.todos.filter((t) => t.id !== id);
-    // this.sortTodos();
   }
 
   getAll() {
@@ -52,12 +50,26 @@ export class TodoStore {
 
   sortTodos() {
     const sortTodoNotCompleted = TodoStore.getInstance()
-      .todos.filter((t) => t.completed === 0)
-      .sort((a, b) => (a.title < b.title ? -1 : 1));
+      .todos.filter((t) => t.completed === 0 || !t.completed)
+      .sort((a, b) => {
+        const dateA = a.updated_at ? a.updated_at.getTime() : 0;
+        const dateB = b.updated_at ? b.updated_at.getTime() : 0;
+        if (dateA || dateB) {
+          return dateA < dateB ? 1 : -1;
+        }
+        return a.title < b.title ? -1 : 1;
+      });
 
     const sortTodoCompleted = TodoStore.getInstance()
-      .todos.filter((t) => t.completed === 1)
-      .sort((a, b) => (a.title < b.title ? -1 : 1));
+      .todos.filter((t) => t.completed === 1 || t.completed)
+      .sort((a, b) => {
+        const dateA = a.updated_at ? a.updated_at.getTime() : 0;
+        const dateB = b.updated_at ? b.updated_at.getTime() : 0;
+        if (dateA || dateB) {
+          return dateA > dateB ? 1 : -1;
+        }
+        return a.title < b.title ? -1 : 1;
+      });
 
     TodoStore.getInstance().todos = [
       ...sortTodoNotCompleted,
